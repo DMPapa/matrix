@@ -5,10 +5,13 @@ document.getElementById("send-btn").addEventListener("click", () => {
     addMessage("user", message);
     input.value = "";
 
-    // Simulación futura de respuesta
+    // Simulación de respuesta
     setTimeout(() => {
-      addMessage("bot", "Estoy pensando... (respuesta simulada)");
-    }, 1000);
+      addMessage("bot", "Pensando...");
+      setTimeout(() => {
+        document.querySelector(".bot-message:last-child").textContent = "Esta es una respuesta simulada.";
+      }, 1500);
+    }, 800);
   }
 });
 
