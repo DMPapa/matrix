@@ -6,20 +6,36 @@ document.getElementById("send-btn").addEventListener("click", () => {
     input.value = "";
 
     // Simulación de respuesta
+    addThinking();
     setTimeout(() => {
-      addMessage("bot", "Pensando...");
-      setTimeout(() => {
-        document.querySelector(".bot-message:last-child").textContent = "Esta es una respuesta simulada.";
-      }, 1500);
-    }, 800);
+      removeThinking();
+      addMessage("bot", "Esta es una respuesta simulada.");
+    }, 1500);
   }
 });
 
 function addMessage(sender, text) {
-  const chatWindow = document.getElementById("chat-window");
+  const chatArea = document.getElementById("chat-area");
   const msgDiv = document.createElement("div");
   msgDiv.classList.add("message", sender === "user" ? "user-message" : "bot-message");
   msgDiv.textContent = text;
-  chatWindow.appendChild(msgDiv);
-  chatWindow.scrollTop = chatWindow.scrollHeight;
+  chatArea.appendChild(msgDiv);
+  chatArea.scrollTop = chatArea.scrollHeight;
+}
+
+function addThinking() {
+  const chatArea = document.getElementById("chat-area");
+  const thinkingDiv = document.createElement("div");
+  thinkingDiv.classList.add("message", "bot-message");
+  thinkingDiv.setAttribute("id", "thinking");
+  thinkingDiv.textContent = "Pensando...";
+  chatArea.appendChild(thinkingDiv);
+  chatArea.scrollTop = chatArea.scrollHeight;
+}
+
+function removeThinking() {
+  const thinkingDiv = document.getElementById("thinking");
+  if (thinkingDiv) {
+    thinkingDiv.remove();
+  }
 }
